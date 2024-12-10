@@ -1,5 +1,18 @@
+import { useState } from "react";
 import Calendar from "react-calendar";
 
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
+
 export function DisplayCalendar() {
-  return <Calendar />;
+  const [date, setDate] = useState<Value>(new Date());
+
+  return (
+    <div>
+      <Calendar onChange={setDate} value={date} />
+
+      <p>{date!.toString()}</p>
+    </div>
+  );
 }
