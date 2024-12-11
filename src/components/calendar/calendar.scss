@@ -1,0 +1,102 @@
+$calendar-background-color: #d4f7d4;
+$button-background-color: #6f876f;
+$button-hover-color: #556b55;
+$button-active-color: #a5c1a5;
+$weekend-color: #dfdfdf;
+
+.calendar-container {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 20px;
+    background-color: $calendar-background-color;
+    padding: 10px;
+    border-radius: 3px;
+
+    .react-calendar {
+        &__tile {
+            &--now {
+                text-decoration: underline dotted;
+                text-decoration-thickness: 3px;
+            }
+        }
+
+        &__navigation {
+            display: flex;
+
+            &__label {
+                font-weight: bold;
+            }
+
+            &__arrow {
+                flex-grow: 0.333;
+            }
+        }
+
+        &__month-view {
+            &__weekdays {
+                text-align: center;
+            }
+
+            &__days {
+                display: grid !important;
+                grid-template-columns: repeat(7, 14.2%);
+
+                &__day {
+                    &--neighboringMonth {
+                        opacity: 0.7;
+                    }
+
+                    &--weekend {
+                        color: $weekend-color;
+                    }
+                }
+
+                & .react-calendar__tile {
+                    max-width: initial !important;
+
+                    &--range {
+                        box-shadow: 0 0 6px 2px black;
+                    }
+                }
+            }
+        }
+
+        &__year-view,
+        &__decade-view,
+        &__century-view {
+
+            &__months,
+            &__years,
+            &__decades {
+                display: grid !important;
+                grid-template-columns: repeat(5, 20%);
+
+                &.react-calendar__year-view__months {
+                    grid-template-columns: repeat(3, 33.3%);
+                }
+
+                & .react-calendar__tile {
+                    max-width: initial !important;
+                }
+            }
+        }
+    }
+
+    button {
+        margin: 4px;
+        background-color: $button-background-color;
+        border: 0;
+        border-radius: 3px;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $button-hover-color;
+        }
+
+        &:active {
+            background-color: $button-active-color;
+        }
+    }
+}
