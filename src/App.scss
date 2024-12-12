@@ -1,0 +1,20 @@
+$text: #373f37;
+
+@font-face {
+    font-family: dosis;
+    src: url("font/dosis.ttf");
+}
+
+html {
+    font-family: dosis;
+    color: $text;
+    background-color: #ecefec;
+}
+
+button {
+    font-family: dosis;
+}
+
+h1 {
+    text-align: center;
+}

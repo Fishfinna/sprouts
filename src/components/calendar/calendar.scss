@@ -1,40 +1,69 @@
-$calendar-background-color: #d4f7d4;
+$calendar-background-color: #455345;
 $button-background-color: #6f876f;
-$button-hover-color: #556b55;
-$button-active-color: #a5c1a5;
-$weekend-color: #dfdfdf;
+$button-hover-color: #8cb28c;
+$text: #eff6ef;
 
 .calendar-container {
     max-width: 600px;
     margin: auto;
-    margin-top: 20px;
     background-color: $calendar-background-color;
     padding: 10px;
-    border-radius: 3px;
+    border-radius: 10px;
 
     .react-calendar {
+
         &__tile {
+
             &--now {
-                text-decoration: underline dotted;
-                text-decoration-thickness: 3px;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    width: 5px;
+                    height: 5px;
+                    background-color: $text;
+                    border-radius: 5px;
+                    top: 80%;
+                    left: 51%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            &--active {
+                background-color: $button-hover-color;
+                border: none;
+                box-shadow: none !important;
             }
         }
 
         &__navigation {
             display: flex;
+            margin-bottom: 12px;
 
             &__label {
-                font-weight: bold;
+                font-size: large;
             }
 
             &__arrow {
                 flex-grow: 0.333;
+                font-size: large;
             }
         }
 
         &__month-view {
             &__weekdays {
                 text-align: center;
+                color: $text;
+                font-family: dosis;
+
+                abbr {
+                    text-decoration: none;
+                }
             }
 
             &__days {
@@ -43,11 +72,7 @@ $weekend-color: #dfdfdf;
 
                 &__day {
                     &--neighboringMonth {
-                        opacity: 0.7;
-                    }
-
-                    &--weekend {
-                        color: $weekend-color;
+                        opacity: 0.35;
                     }
                 }
 
@@ -87,7 +112,7 @@ $weekend-color: #dfdfdf;
         background-color: $button-background-color;
         border: 0;
         border-radius: 3px;
-        color: white;
+        color: $text;
         padding: 10px;
         cursor: pointer;
 
@@ -96,7 +121,7 @@ $weekend-color: #dfdfdf;
         }
 
         &:active {
-            background-color: $button-active-color;
+            background-color: $text;
         }
     }
 }

@@ -1,9 +1,10 @@
 import { DisplayCalendar } from "./components/calendar/calendar";
+import "./App.scss";
 
 function App() {
   return (
     <>
-      <div>hello</div>
+      <h1>Sprout</h1>
       <DisplayCalendar />
     </>
   );

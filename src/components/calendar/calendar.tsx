@@ -12,8 +12,6 @@ export function DisplayCalendar() {
   return (
     <div className="calendar-container">
       <Calendar onChange={setDate} value={date} />
-
-      <p>{date!.toString()}</p>
     </div>
   );
 }
