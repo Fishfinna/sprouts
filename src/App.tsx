@@ -9,7 +9,7 @@ function App() {
     <>
       <h1>Sprout</h1>
       <DisplayCalendar date={date} setDate={setDate} />
-      <p>{date.toString()}</p>
+      <p>{date instanceof Date ? date.toDateString() : null}</p>
     </>
   );
 }
