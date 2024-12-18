@@ -1,9 +1,12 @@
+import "./table.scss"
+
 export function Table() {
     return (<table>
         <tr>
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Country</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Need/Want</th>
+            <th>Price</th>
         </tr>
         <tr>
             <td>Alfreds Futterkiste</td>

@@ -1,0 +1,32 @@
+$border-color: #455345;
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: 0;
+    border-radius: 10px;
+    border: solid $border-color 1px;
+}
+
+th {
+    flex: 1;
+}
+
+tr {
+    text-align: center;
+}
+
+td,
+th {
+    border-left: solid $border-color 1px;
+    border-top: solid $border-color 1px;
+}
+
+th {
+    border-top: none;
+}
+
+td:first-child,
+th:first-child {
+    border-left: none;
+}
