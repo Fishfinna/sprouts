@@ -1,4 +1,6 @@
 $border-color: #455345;
+$green-color: #4CAF50;
+$red-color: #f44336;
 
 table {
     table-layout: fixed;
@@ -9,7 +11,6 @@ table {
 }
 
 th {
-    flex: 1;
     background-color: rgba($border-color, 0.1);
 }
 
@@ -30,4 +31,34 @@ th {
 td:first-child,
 th:first-child {
     border-left: none;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    border: none;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.green {
+    background-color: $green-color;
+    color: white;
+}
+
+button.red {
+    background-color: $red-color;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
 }
