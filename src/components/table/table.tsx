@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./table.scss";
 
-export function Table() {
-    const [rows, setRows] = useState([
-        { incomeSpending: "Income", category: "", date: "", needWant: false, price: "" },
-        { incomeSpending: "Income", category: "", date: "", needWant: false, price: "" }
-    ]);
+interface Transaction {
+    isSpending: boolean;
+    category: string | null;
+    date: Date | string | null;
+    isNeed: boolean;
+    price: number;
+}
+
+export function Table(params: { transactions: Transaction[] }) {
+    const [rows, setRows] = useState(params.transactions);
 
     const handleChange = (e, rowIndex, columnName) => {
         const value = e.target.value;
@@ -69,10 +74,10 @@ export function Table() {
                     <tr key={rowIndex}>
                         <td>
                             <button
-                                className={row.incomeSpending === "Income" ? "green" : "red"}
+                                className={row.isSpending ? "red" : "green"}
                                 onClick={() => handleToggle(rowIndex, "incomeSpending")}
                             >
-                                {row.incomeSpending}
+                                {row.isSpending ? "Spending" : "Income"}
                             </button>
                         </td>
                         <td>
