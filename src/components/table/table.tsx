@@ -6,42 +6,43 @@ interface Transaction {
     category: string | null;
     date: Date | string | null;
     isNeed: boolean;
-    price: number;
+    price: number | null;
 }
 
 export function Table(params: { transactions: Transaction[] }) {
     const [rows, setRows] = useState(params.transactions);
 
-    const handleChange = (e, rowIndex, columnName) => {
-        const value = e.target.value;
-        const newRows = [...rows];
+    const handleChange = (e: Event, rowIndex: number, columnIndex: number) => {
+        console.log(rowIndex, columnIndex);
+        // const value = e.target.value;
+        // const newRows = [...rows];
 
-        if (columnName === "price") {
-            const formattedValue = formatNumber(value);
-            newRows[rowIndex][columnName] = formattedValue;
-        } else {
-            newRows[rowIndex][columnName] = value;
-        }
+        // if (columnName === "price") {
+        //     const formattedValue = formatNumber(value);
+        //     newRows[rowIndex][columnName] = formattedValue;
+        // } else {
+        //     newRows[rowIndex][columnName] = value;
+        // }
 
-        setRows(newRows);
+        // setRows(newRows);
     };
 
-    const handleToggle = (rowIndex, columnName) => {
+    const handleToggle = (rowIndex: number, columnName: number) => {
         const newRows = [...rows];
         newRows[rowIndex][columnName] = newRows[rowIndex][columnName] === "Income" ? "Spending" : "Income";
         setRows(newRows);
     };
 
-    const handleNeedWantToggle = (rowIndex) => {
+    const handleNeedWantToggle = (rowIndex: number) => {
         const newRows = [...rows];
-        newRows[rowIndex].needWant = !newRows[rowIndex].needWant;
+        newRows[rowIndex].isNeed = !newRows[rowIndex].isNeed;
         setRows(newRows);
     };
 
     const addRow = () => {
         setRows([
             ...rows,
-            { incomeSpending: "Income", category: "", date: "", needWant: false, price: "" }
+            { isSpending: true, category: "", date: "", isNeed: false, price: null }
         ]);
     };
 
@@ -96,10 +97,10 @@ export function Table(params: { transactions: Transaction[] }) {
                         </td>
                         <td>
                             <button
-                                className={row.needWant ? "green" : "red"}
+                                className={row.isNeed ? "green" : "red"}
                                 onClick={() => handleNeedWantToggle(rowIndex)}
                             >
-                                {row.needWant ? "Need" : "Want"}
+                                {row.isNeed ? "Need" : "Want"}
                             </button>
                         </td>
                         <td>
