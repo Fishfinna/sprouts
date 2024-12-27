@@ -1,23 +1,17 @@
 import { useState } from "react";
+import { Transaction } from "../../types/transaction";
 import "./table.scss";
 
-interface Transaction {
-    isSpending: boolean;
-    category: string | null;
-    date: Date | string | null;
-    isNeed: boolean;
-    price: number | null;
-}
-
-export function Table(params: { transactions: Transaction[] }) {
-    const [rows, setRows] = useState(params.transactions);
-
-    const handleChange = (e: Event, rowIndex: number, columnIndex: number) => {
-        console.log(rowIndex, columnIndex);
-        // const value = e.target.value;
+export function Table(params: { transactions: Transaction[], setTransactions: (arg0: Transaction[]) => void }) {
+    const handleChange = (event: Event, rowIndex: number, columnName: string) => {
+        let value = event.target.value;        
+        console.log(value)
         // const newRows = [...rows];
 
-        // if (columnName === "price") {
+        if (columnName === "price") { 
+            console.log(value)
+            event.target.value = formatNumber(value)
+        }
         //     const formattedValue = formatNumber(value);
         //     newRows[rowIndex][columnName] = formattedValue;
         // } else {
@@ -27,21 +21,15 @@ export function Table(params: { transactions: Transaction[] }) {
         // setRows(newRows);
     };
 
-    const handleToggle = (rowIndex: number, columnName: number) => {
-        const newRows = [...rows];
-        newRows[rowIndex][columnName] = newRows[rowIndex][columnName] === "Income" ? "Spending" : "Income";
-        setRows(newRows);
-    };
-
-    const handleNeedWantToggle = (rowIndex: number) => {
-        const newRows = [...rows];
-        newRows[rowIndex].isNeed = !newRows[rowIndex].isNeed;
-        setRows(newRows);
+    const handleToggle = (rowIndex: number, columnName: string) => {
+        const newRows = [...params.transactions];
+        newRows[rowIndex][columnName] = !newRows[rowIndex][columnName];
+        params.setTransactions(newRows);
     };
 
     const addRow = () => {
-        setRows([
-            ...rows,
+        params.setTransactions([
+            ...params.transactions,
             { isSpending: true, category: "", date: "", isNeed: false, price: null }
         ]);
     };
@@ -71,12 +59,13 @@ export function Table(params: { transactions: Transaction[] }) {
                 </tr>
             </thead>
             <tbody>
-                {rows.map((row, rowIndex) => (
+                {params.transactions.map((row, rowIndex) => (
                     <tr key={rowIndex}>
                         <td>
                             <button
                                 className={row.isSpending ? "red" : "green"}
-                                onClick={() => handleToggle(rowIndex, "incomeSpending")}
+                                value={row.isSpending}
+                                onClick={() => handleToggle(rowIndex, "isSpending")}
                             >
                                 {row.isSpending ? "Spending" : "Income"}
                             </button>
@@ -85,6 +74,7 @@ export function Table(params: { transactions: Transaction[] }) {
                             <input
                                 type="text"
                                 value={row.category}
+                                placeholder="category"
                                 onChange={(e) => handleChange(e, rowIndex, "category")}
                             />
                         </td>
@@ -98,7 +88,7 @@ export function Table(params: { transactions: Transaction[] }) {
                         <td>
                             <button
                                 className={row.isNeed ? "green" : "red"}
-                                onClick={() => handleNeedWantToggle(rowIndex)}
+                                onClick={() => handleToggle(rowIndex, "isNeed")}
                             >
                                 {row.isNeed ? "Need" : "Want"}
                             </button>
@@ -107,6 +97,7 @@ export function Table(params: { transactions: Transaction[] }) {
                             <input
                                 type="text"
                                 value={row.price}
+                                placeholder="0.00"
                                 onChange={(e) => handleChange(e, rowIndex, "price")}
                             />
                         </td>
