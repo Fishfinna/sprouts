@@ -1,6 +1,7 @@
 $border-color: #455345;
 $green-color: #4CAF50;
-$red-color: #f44336;
+$red-color: #e06161;
+$input-text-color: $border-color;
 
 table {
     table-layout: fixed;
@@ -42,6 +43,7 @@ input[type="number"] {
     box-sizing: border-box;
     background-color: transparent;
     font-family: dosis;
+    color: $input-text-color;
     font-size: large;
 }
 
@@ -52,6 +54,7 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: large;
+    border-radius: 10px;
 }
 
 button.green {
