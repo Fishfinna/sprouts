@@ -1,6 +1,7 @@
 $border-color: #455345;
 $green-color: #4CAF50;
 $red-color: #e06161;
+$gray-color: #4f4f4f;
 $input-text-color: $border-color;
 
 table {
@@ -45,6 +46,18 @@ input[type="number"] {
     font-family: dosis;
     color: $input-text-color;
     font-size: large;
+
+    &.red {
+        color: $red-color;
+    }
+
+    &.green {
+        color: $green-color;
+    }
+
+    &.gray {
+        color: $gray-color;
+    }
 }
 
 button {
@@ -65,6 +78,17 @@ button.green {
 button.red {
     background-color: $red-color;
     color: white;
+}
+
+button.gray {
+    background-color: $gray-color;
+    color: white;
+    opacity: .4;
+    cursor: default;
+
+    &:hover {
+        opacity: .4;
+    }
 }
 
 button:hover {

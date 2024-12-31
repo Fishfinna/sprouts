@@ -1,7 +1,7 @@
 export interface Transaction {
-    isSpending: boolean;
-    category?: string;
-    date?: Date | string;
-    isNeed: boolean;
-    price?: number;
+  isSpending: boolean;
+  category?: string;
+  date?: Date | string;
+  isNeed: boolean | null;
+  price?: number;
 }
