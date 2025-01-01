@@ -94,12 +94,16 @@ export function Table(params: {
             <td>
               <input
                 type="text"
-                className={row.isSpending && row.isNeed ? "green" : row.i}
+                className={
+                  !row.isSpending
+                    ? "green"
+                    : row.isSpending && row.isNeed
+                    ? "gray"
+                    : "red"
+                }
                 value={row.price}
                 placeholder="0.00"
-                onChange={(event: Event) =>
-                  handleChange(event, rowIndex, "price")
-                }
+                onChange={(event) => handleChange(event, rowIndex, "price")}
               />
             </td>
           </tr>
