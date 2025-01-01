@@ -3,5 +3,5 @@ export interface Transaction {
   category?: string;
   date?: Date | string;
   isNeed: boolean | null;
-  price?: number;
+  price?: string;
 }

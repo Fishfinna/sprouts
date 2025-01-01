@@ -1,114 +1,131 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Transaction } from "../../types/transaction";
 import "./table.scss";
 
-export function Table(params: {
+export function Table({
+  transactions,
+  setTransactions,
+}: {
   transactions: Transaction[];
-  setTransactions: (arg0: Transaction[]) => void;
+  setTransactions: (updatedTransactions: Transaction[]) => void;
 }) {
-  const handleChange = (event: Event, rowIndex: number, columnName: string) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    rowIndex: number,
+    columnName: keyof Transaction
+  ) => {
     const value = event.target.value;
-    if (columnName === "price") {
-      event.target.value = formatNumber(value);
-    }
+    const updatedTransactions = [...transactions];
+    const updatedRow = { ...updatedTransactions[rowIndex] };
+
+    updatedRow[columnName] =
+      columnName === "price" ? formatNumber(value) : value;
+    updatedTransactions[rowIndex] = updatedRow;
+
+    setTransactions(updatedTransactions);
   };
 
-  const handleToggle = (rowIndex: number, columnName: string) => {
-    const newRows = [...params.transactions];
-    newRows[rowIndex][columnName] = !newRows[rowIndex][columnName];
-    params.setTransactions(newRows);
+  const handleToggle = (rowIndex: number, columnName: keyof Transaction) => {
+    const updatedTransactions = [...transactions];
+    updatedTransactions[rowIndex][columnName] =
+      !updatedTransactions[rowIndex][columnName];
+    setTransactions(updatedTransactions);
   };
 
   const addRow = () => {
-    params.setTransactions([
-      ...params.transactions,
-      { isSpending: true, category: "", date: "", isNeed: false, price: null },
+    setTransactions([
+      ...transactions,
+      { isSpending: true, isNeed: true, category: "", date: "", price: "" },
     ]);
   };
 
-  const formatNumber = (num) => {
+  useEffect(() => {
+    if (transactions[transactions.length - 1].price) {
+      addRow();
+    }
+  }, [transactions]);
+
+  const formatNumber = (num: string) => {
     const cleanedNum = num.replace(/[^0-9.]/g, "");
-    if (cleanedNum === "" || cleanedNum === ".") return cleanedNum;
+    if (!cleanedNum || cleanedNum === ".") return cleanedNum;
 
     const parts = cleanedNum.split(".").slice(0, 2);
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    if (parts[1]) {
-      parts[1] = parts[1].slice(0, 2);
-    }
+    if (parts[1]) parts[1] = parts[1].slice(0, 2);
 
     return "$" + parts.join(".");
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Income/Spending</th>
-          <th>Category</th>
-          <th>Date</th>
-          <th>Need/Want</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        {params.transactions.map((row, rowIndex) => (
-          <tr key={rowIndex}>
-            <td>
-              <button
-                className={row.isSpending ? "red" : "green"}
-                value={row.isSpending}
-                onClick={() => handleToggle(rowIndex, "isSpending")}
-              >
-                {row.isSpending ? "Spending" : "Income"}
-              </button>
-            </td>
-            <td>
-              <input
-                type="text"
-                value={row.category}
-                placeholder="category"
-                onChange={(e) => handleChange(e, rowIndex, "category")}
-              />
-            </td>
-            <td>
-              <input
-                type="date"
-                value={row.date}
-                onChange={(e) => handleChange(e, rowIndex, "date")}
-              />
-            </td>
-            <td>
-              {row.isSpending ? (
-                <button
-                  className={row.isNeed ? "green" : "red"}
-                  onClick={() => handleToggle(rowIndex, "isNeed")}
-                >
-                  {row.isNeed ? "Need" : "Want"}
-                </button>
-              ) : (
-                <button className="gray" disabled>
-                  N/A
-                </button>
-              )}
-            </td>
-            <td>
-              <input
-                type="text"
-                className={
-                  !row.isSpending
-                    ? "green"
-                    : row.isSpending && row.isNeed
-                    ? "gray"
-                    : "red"
-                }
-                value={row.price}
-                placeholder="0.00"
-                onChange={(event) => handleChange(event, rowIndex, "price")}
-              />
-            </td>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Income/Spending</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Need/Want</th>
+            <th>Price</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {transactions.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              <td>
+                <button
+                  className={row.isSpending ? "red" : "green"}
+                  onClick={() => handleToggle(rowIndex, "isSpending")}
+                >
+                  {row.isSpending ? "Spending" : "Income"}
+                </button>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  value={row.category || ""}
+                  placeholder="category"
+                  onChange={(e) => handleChange(e, rowIndex, "category")}
+                />
+              </td>
+              <td>
+                <input
+                  type="date"
+                  value={row.date || ""}
+                  onChange={(e) => handleChange(e, rowIndex, "date")}
+                />
+              </td>
+              <td>
+                {row.isSpending ? (
+                  <button
+                    className={row.isNeed ? "green" : "red"}
+                    onClick={() => handleToggle(rowIndex, "isNeed")}
+                  >
+                    {row.isNeed ? "Need" : "Want"}
+                  </button>
+                ) : (
+                  <button className="gray" disabled>
+                    N/A
+                  </button>
+                )}
+              </td>
+              <td>
+                <input
+                  type="text"
+                  className={
+                    !row.isSpending ? "green" : row.isNeed ? "gray" : "red"
+                  }
+                  value={row.price || ""}
+                  placeholder="0.00"
+                  onChange={(e) => handleChange(e, rowIndex, "price")}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button onClick={addRow} className="gray">
+        +
+      </button>
+    </div>
   );
 }
