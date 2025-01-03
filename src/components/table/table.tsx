@@ -90,7 +90,8 @@ export function Table({
               <td>
                 <input
                   type="date"
-                  value={row.date || ""}
+                  className={row.date ? "" : "faded"}
+                  value={(row.date as string) || ""}
                   onChange={(e) => handleChange(e, rowIndex, "date")}
                 />
               </td>
