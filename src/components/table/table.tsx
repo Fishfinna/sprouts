@@ -139,7 +139,7 @@ export function Table({
                       removeRow(rowIndex);
                     }}
                   >
-                    remove
+                    <span className="material-icons">delete</span>
                   </button>
                 </div>
               </td>
@@ -148,7 +148,7 @@ export function Table({
         </tbody>
       </table>
       <button onClick={addRow} className="gray add-row-button">
-        +
+        <span className="material-icons">add</span>
       </button>
     </div>
   );
