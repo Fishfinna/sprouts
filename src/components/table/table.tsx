@@ -9,6 +9,14 @@ export function Table({
   transactions: Transaction[];
   setTransactions: (updatedTransactions: Transaction[]) => void;
 }) {
+  const defaultTransaction = {
+    isSpending: true,
+    isNeed: true,
+    category: "",
+    date: "",
+    price: "",
+  };
+
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     rowIndex: number,
@@ -33,14 +41,15 @@ export function Table({
   };
 
   const addRow = () => {
-    setTransactions([
-      ...transactions,
-      { isSpending: true, isNeed: true, category: "", date: "", price: "" },
-    ]);
+    setTransactions([...transactions, defaultTransaction]);
   };
 
   const removeRow = (rowIndex: number) => {
-    setTransactions(transactions.filter((_, index) => index !== rowIndex));
+    if (transactions.length > 1) {
+      setTransactions(transactions.filter((_, index) => index !== rowIndex));
+    } else {
+      setTransactions([defaultTransaction]);
+    }
   };
 
   useEffect(() => {
