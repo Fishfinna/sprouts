@@ -100,3 +100,15 @@ button.gray {
 button:hover {
     opacity: 0.8;
 }
+
+.add-row-button {
+    align-self: end
+}
+
+.delete-row-button {
+    background-color: transparent;
+}
+
+.price {
+    display: flex
+}

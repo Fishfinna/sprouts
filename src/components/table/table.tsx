@@ -39,6 +39,10 @@ export function Table({
     ]);
   };
 
+  const removeRow = (rowIndex: number) => {
+    setTransactions(transactions.filter((_, index) => index !== rowIndex));
+  };
+
   useEffect(() => {
     if (transactions[transactions.length - 1].price) {
       addRow();
@@ -110,21 +114,31 @@ export function Table({
                 )}
               </td>
               <td>
-                <input
-                  type="text"
-                  className={
-                    !row.isSpending ? "green" : row.isNeed ? "gray" : "red"
-                  }
-                  value={row.price || ""}
-                  placeholder="0.00"
-                  onChange={(e) => handleChange(e, rowIndex, "price")}
-                />
+                <div className="price">
+                  <input
+                    type="text"
+                    className={
+                      !row.isSpending ? "green" : row.isNeed ? "gray" : "red"
+                    }
+                    value={row.price || ""}
+                    placeholder="0.00"
+                    onChange={(e) => handleChange(e, rowIndex, "price")}
+                  />
+                  <button
+                    className="delete-row-button"
+                    onClick={() => {
+                      removeRow(rowIndex);
+                    }}
+                  >
+                    remove
+                  </button>
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <button onClick={addRow} className="gray">
+      <button onClick={addRow} className="gray add-row-button">
         +
       </button>
     </div>
