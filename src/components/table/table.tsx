@@ -70,7 +70,7 @@ export function Table({
   };
 
   return (
-    <div>
+    <div className="spending-table-container">
       <table>
         <thead>
           <tr>
@@ -139,7 +139,7 @@ export function Table({
                       removeRow(rowIndex);
                     }}
                   >
-                    <span className="material-icons">delete</span>
+                    <i className="material-icons">delete</i>
                   </button>
                 </div>
               </td>
@@ -147,8 +147,8 @@ export function Table({
           ))}
         </tbody>
       </table>
-      <button onClick={addRow} className="gray add-row-button">
-        <span className="material-icons">add</span>
+      <button onClick={addRow} className="add-row-button">
+        <i className="material-icons">add</i>
       </button>
     </div>
   );

@@ -4,111 +4,110 @@ $red-color: #e06161;
 $gray-color: #4f4f4f;
 $input-text-color: $border-color;
 
-table {
-    table-layout: fixed;
-    width: 100%;
-    border-spacing: 0;
-    border-radius: 10px;
-    border: solid $border-color 1px;
-}
+.spending-table-container {
+    display: flex;
+    flex-direction: column;
 
-th {
-    background-color: rgba($border-color, 0.1);
-    overflow: hidden;
-}
-
-tr {
-    text-align: center;
-}
-
-td,
-th {
-    border-left: solid $border-color 1px;
-    border-top: solid $border-color 1px;
-}
-
-th {
-    border-top: none;
-}
-
-td:first-child,
-th:first-child {
-    border-left: none;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="number"] {
-    border: none;
-    padding: 5px;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: transparent;
-    font-family: dosis;
-    color: $input-text-color;
-    font-size: large;
-
-    &.red {
-        color: $red-color;
+    table {
+        table-layout: fixed;
+        width: 100%;
+        border-spacing: 0;
+        border-radius: 10px;
+        border: solid $border-color 1px;
     }
 
-    &.green {
-        color: $green-color;
+    th {
+        background-color: rgba($border-color, 0.1);
+        overflow: hidden;
     }
 
-    &.gray {
-        color: $gray-color;
+    tr {
+        text-align: center;
     }
 
-    &.faded {
-        color: $gray-color;
-        opacity: 0.8;
+    td,
+    th {
+        border-left: solid $border-color 1px;
+        border-top: solid $border-color 1px;
     }
-}
 
-button {
-    padding: 5px 10px;
-    margin: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: large;
-    border-radius: 10px;
-}
-
-button.green {
-    background-color: $green-color;
-    color: white;
-}
-
-button.red {
-    background-color: $red-color;
-    color: white;
-}
-
-button.gray {
-    background-color: $gray-color;
-    color: white;
-    opacity: .4;
-    cursor: default;
-
-    &:hover {
-        opacity: .4;
+    th {
+        border-top: none;
     }
-}
 
-button:hover {
-    opacity: 0.8;
-}
+    td:first-child,
+    th:first-child {
+        border-left: none;
+    }
 
-.add-row-button {
-    align-self: end
-}
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+        border: none;
+        padding: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: transparent;
+        font-family: dosis;
+        color: $input-text-color;
+        font-size: large;
 
-.delete-row-button {
-    background-color: transparent;
-}
+        &.red {
+            color: $red-color;
+        }
 
-.price {
-    display: flex
+        &.green {
+            color: $green-color;
+        }
+
+        &.gray {
+            color: $gray-color;
+        }
+
+        &.faded {
+            color: $gray-color;
+            opacity: 0.8;
+        }
+    }
+
+    button {
+        padding: 5px 10px;
+        margin: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: large;
+        border-radius: 10px;
+    }
+
+    button.green {
+        background-color: $green-color;
+        color: white;
+    }
+
+    button.red {
+        background-color: $red-color;
+        color: white;
+    }
+
+    button {
+
+        &.add-row-button {
+            align-self: flex-end;
+        }
+
+        &.add-row-button,
+        &.delete-row-button {
+            color: $gray-color;
+            opacity: 0.5;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .price {
+        display: flex
+    }
 }
