@@ -9,6 +9,7 @@ $text: #eff6ef;
     background-color: $calendar-background-color;
     padding: 10px;
     border-radius: 10px;
+    margin-bottom: 20px;
 
     .react-calendar {
 
@@ -122,6 +123,27 @@ $text: #eff6ef;
 
         &:active {
             background-color: $text;
+        }
+    }
+
+    .today-button-container {
+        display: flex;
+        justify-content: right;
+
+        button {
+            background-color: transparent;
+            border: none;
+            font-size: large;
+            margin: 5px;
+            color: $button-hover-color;
+
+            &:hover {
+                color: $button-background-color
+            }
+
+            &.hidden {
+                display: none;
+            }
         }
     }
 }

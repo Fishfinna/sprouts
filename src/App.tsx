@@ -16,7 +16,6 @@ function App() {
     <>
       <h1>Sprout</h1>
       <DisplayCalendar date={date} setDate={setDate} />
-      <p>{date instanceof Date ? date.toDateString() : null}</p>
       <Table transactions={transactions} setTransactions={setTransactions} />
     </>
   );
