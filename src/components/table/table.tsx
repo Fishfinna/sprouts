@@ -104,7 +104,10 @@ export function Table({
                 <input
                   type="date"
                   className={row.date ? "" : "faded"}
-                  value={(row.date as string) || ""}
+                  value={
+                    (row.date as string) ||
+                    new Date().toISOString().split("T")[0]
+                  }
                   onChange={(e) => handleChange(e, rowIndex, "date")}
                 />
               </td>

@@ -43,7 +43,7 @@ export function DisplayCalendar(params: {
           }
           onClick={handleTodayClick}
         >
-          today
+          return to today
         </button>
       </div>
     </div>
