@@ -3,6 +3,7 @@ $green-color: #4CAF50;
 $red-color: #e06161;
 $gray-color: #4f4f4f;
 $input-text-color: $border-color;
+$light-text-color: #eff6ef;
 
 .spending-table-container {
     display: flex;
@@ -13,16 +14,31 @@ $input-text-color: $border-color;
         width: 100%;
         border-spacing: 0;
         border-radius: 10px;
-        border: solid $border-color 1px;
+        border: solid rgba($border-color, 0.9) 1px;
     }
 
     th {
-        background-color: rgba($border-color, 0.1);
+        background-color: $border-color;
+        padding: 10px;
         overflow: hidden;
+        color: $light-text-color;
+        font-weight: lighter;
+
+        &:last-child {
+            border-radius: 0 6px 0 0;
+        }
+
+        &:first-child {
+            border-radius: 6px 0 0 0;
+        }
     }
 
     tr {
         text-align: center;
+
+        &:nth-child(even) {
+            background-color: rgba($gray-color, 0.05);
+        }
     }
 
     td,

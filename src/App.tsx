@@ -9,7 +9,11 @@ function App() {
   const [date, setDate] = useState<CalendarDate>(new Date());
   // update to load from disk
   const [transactions, setTransactions] = useState<Transaction[]>([
-    { isSpending: true, isNeed: true },
+    {
+      isSpending: true,
+      isNeed: true,
+      date: new Date().toLocaleDateString("en-CA"),
+    },
   ]);
 
   return (

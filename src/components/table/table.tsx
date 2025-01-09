@@ -13,7 +13,7 @@ export function Table({
     isSpending: true,
     isNeed: true,
     category: "",
-    date: "",
+    date: new Date().toLocaleDateString("en-CA"),
     price: "",
   };
 
@@ -103,11 +103,7 @@ export function Table({
               <td>
                 <input
                   type="date"
-                  className={row.date ? "" : "faded"}
-                  value={
-                    (row.date as string) ||
-                    new Date().toISOString().split("T")[0]
-                  }
+                  value={row.date as string}
                   onChange={(e) => handleChange(e, rowIndex, "date")}
                 />
               </td>
