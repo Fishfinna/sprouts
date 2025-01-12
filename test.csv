@@ -1,2 +1,6 @@
-test,name
-123,tester
+isSpending,category,date,isNeed,price
+true,Groceries,2025-01-01,true,150.00
+false,Salary,2025-01-05,,3000.00
+true,Transportation,2025-01-06,false,50.00
+true,Entertainment,2025-01-07,false,120.00
+false,Bonus,2025-01-08,,500.00
