@@ -8,6 +8,7 @@ $light-text-color: #eff6ef;
 .spending-table-container {
     display: flex;
     flex-direction: column;
+    margin: 10px;
 
     table {
         table-layout: fixed;

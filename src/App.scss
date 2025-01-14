@@ -1,4 +1,4 @@
-$text: #373f37;
+@use 'variables' as var;
 
 @font-face {
     font-family: dosis;
@@ -7,7 +7,7 @@ $text: #373f37;
 
 html {
     font-family: dosis;
-    color: $text;
+    color: var.$text;
     background-color: #ecefec;
 }
 
@@ -17,4 +17,34 @@ button {
 
 h1 {
     text-align: center;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    border: none;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: transparent;
+    font-family: dosis;
+    color: var.$input-text-color;
+    font-size: large;
+
+    &.red {
+        color: var.$red-color;
+    }
+
+    &.green {
+        color: var.$green-color;
+    }
+
+    &.gray {
+        color: var.$gray-color;
+    }
+
+    &.faded {
+        color: var.$gray-color;
+        opacity: 0.8;
+    }
 }
