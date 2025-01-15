@@ -1,9 +1,4 @@
-$border-color: #455345;
-$green-color: #4CAF50;
-$red-color: #e06161;
-$gray-color: #4f4f4f;
-$input-text-color: $border-color;
-$light-text-color: #eff6ef;
+@use "../../variables" as var;
 
 .spending-table-container {
     display: flex;
@@ -15,14 +10,14 @@ $light-text-color: #eff6ef;
         width: 100%;
         border-spacing: 0;
         border-radius: 10px;
-        border: solid rgba($border-color, 0.9) 1px;
+        border: solid rgba(var.$border-color, 0.9) 1px;
     }
 
     th {
-        background-color: $border-color;
+        background-color: var.$border-color;
         padding: 10px;
         overflow: hidden;
-        color: $light-text-color;
+        color: var.$light-text-color;
         font-weight: lighter;
 
         &:last-child {
@@ -38,14 +33,14 @@ $light-text-color: #eff6ef;
         text-align: center;
 
         &:nth-child(even) {
-            background-color: rgba($gray-color, 0.05);
+            background-color: rgba(var.$gray-color, 0.05);
         }
     }
 
     td,
     th {
-        border-left: solid $border-color 1px;
-        border-top: solid $border-color 1px;
+        border-left: solid var.$border-color 1px;
+        border-top: solid var.$border-color 1px;
     }
 
     th {
@@ -66,23 +61,23 @@ $light-text-color: #eff6ef;
         box-sizing: border-box;
         background-color: transparent;
         font-family: dosis;
-        color: $input-text-color;
+        color: var.$input-text-color;
         font-size: large;
 
         &.red {
-            color: $red-color;
+            color: var.$red-color;
         }
 
         &.green {
-            color: $green-color;
+            color: var.$green-color;
         }
 
         &.gray {
-            color: $gray-color;
+            color: var.$gray-color;
         }
 
         &.faded {
-            color: $gray-color;
+            color: var.$gray-color;
             opacity: 0.8;
         }
     }
@@ -98,12 +93,12 @@ $light-text-color: #eff6ef;
     }
 
     button.green {
-        background-color: $green-color;
+        background-color: var.$green-color;
         color: white;
     }
 
     button.red {
-        background-color: $red-color;
+        background-color: var.$red-color;
         color: white;
     }
 
@@ -115,7 +110,7 @@ $light-text-color: #eff6ef;
 
         &.add-row-button,
         &.delete-row-button {
-            color: $gray-color;
+            color: var.$gray-color;
             opacity: 0.5;
 
             &:hover {
