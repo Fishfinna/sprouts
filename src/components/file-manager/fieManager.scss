@@ -1,3 +1,5 @@
+@use "../../variables" as var;
+
 .file-drop-area {
     margin: auto;
     position: relative;
@@ -6,7 +8,7 @@
     width: 450px;
     max-width: 100%;
     padding: 25px;
-    border: 1px dashed rgb(7, 69, 36);
+    border: 1px dashed var.$border-color;
     border-radius: 10px;
     transition: 0.2s;
     opacity: 0.9;
