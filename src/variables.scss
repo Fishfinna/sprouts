@@ -1,7 +1,16 @@
-$text: #373f37;
-$light-text-color: #eff6ef;
+// UI
+$dark-text: #373f37;
+$light-text: #eff6ef;
+
 $border-color: #455345;
+$input-text-color: $border-color;
+
+$button-background-color: #6f876f;
+$button-hover-color: #8cb28c;
+
+$calendar-background-color: #455345;
+
+// general colors
 $green-color: #4CAF50;
 $red-color: #e06161;
 $gray-color: #4f4f4f;
-$input-text-color: $border-color;

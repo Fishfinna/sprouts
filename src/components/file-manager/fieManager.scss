@@ -12,23 +12,25 @@
     border-radius: 10px;
     transition: 0.2s;
     opacity: 0.9;
+    color: var.$border-color;
 
     &:hover {
         opacity: 1;
     }
 
     &.is-active {
-        background-color: rgba(194, 218, 197, 0.431);
+        background-color: rgba(var.$border-color, 0.2);
     }
 }
 
 .fake-btn {
     flex-shrink: 0;
-    background-color: rgba(166, 210, 168, 0.549);
+    background-color: var.$button-background-color;
     border-radius: 10px;
     padding: 8px 15px;
     margin-right: 10px;
     font-size: 18px;
+    color: var.$light-text;
 }
 
 .file-msg {
