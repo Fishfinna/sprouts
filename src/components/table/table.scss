@@ -35,6 +35,10 @@
         &:nth-child(even) {
             background-color: rgba(var.$gray-color, 0.05);
         }
+
+        &.drag-over {
+            background-color: rgba(var.$green-color, 0.1);
+        }
     }
 
     td,
@@ -121,5 +125,18 @@
 
     .price {
         display: flex
+    }
+
+    .grab-handle {
+        cursor: grab;
+        padding: 10px;
+        margin-top: -1px;
+        position: absolute;
+        left: 10px;
+        color: rgba(var.$gray-color, 0.5);
+
+        &:active {
+            cursor: grabbing;
+        }
     }
 }

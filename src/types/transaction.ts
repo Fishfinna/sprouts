@@ -4,4 +4,5 @@ export interface Transaction {
   date?: Date | string;
   isNeed: boolean | null;
   price?: string;
+  isTouched?: boolean;
 }

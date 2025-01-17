@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Transaction } from "../../types/transaction";
 import "./table.scss";
 
@@ -9,13 +9,18 @@ export function Table({
   transactions: Transaction[];
   setTransactions: (updatedTransactions: Transaction[]) => void;
 }) {
-  const defaultTransaction = {
+  const defaultTransaction: Transaction = {
     isSpending: true,
     isNeed: true,
     category: "",
     date: new Date().toLocaleDateString("en-CA"),
     price: "",
+    isTouched: false,
   };
+
+  // Handling drag state
+  const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -28,20 +33,37 @@ export function Table({
 
     updatedRow[columnName] =
       columnName === "price" ? formatNumber(value) : value;
-    updatedTransactions[rowIndex] = updatedRow;
 
+    updatedRow.isTouched = true; // Mark row as touched
+
+    updatedTransactions[rowIndex] = updatedRow;
     setTransactions(updatedTransactions);
+
+    // Add a new row only when the user starts typing in the last row
+    if (
+      rowIndex === transactions.length - 1 &&
+      Object.values(updatedRow).some((value) => value !== "" && value !== false)
+    ) {
+      addRow();
+    }
   };
 
   const handleToggle = (rowIndex: number, columnName: keyof Transaction) => {
     const updatedTransactions = [...transactions];
-    updatedTransactions[rowIndex][columnName] =
-      !updatedTransactions[rowIndex][columnName];
+    const updatedRow = { ...updatedTransactions[rowIndex] };
+
+    updatedRow[columnName] = !updatedRow[columnName];
+    updatedRow.isTouched = true; // Mark as touched
+
+    updatedTransactions[rowIndex] = updatedRow;
     setTransactions(updatedTransactions);
   };
 
   const addRow = () => {
-    setTransactions([...transactions, defaultTransaction]);
+    setTransactions((prevTransactions) => [
+      ...prevTransactions,
+      { ...defaultTransaction },
+    ]);
   };
 
   const removeRow = (rowIndex: number) => {
@@ -52,12 +74,6 @@ export function Table({
     }
   };
 
-  useEffect(() => {
-    if (transactions[transactions.length - 1].price) {
-      addRow();
-    }
-  }, [transactions]);
-
   const formatNumber = (num: string) => {
     const cleanedNum = num.replace(/[^0-9.]/g, "");
     if (!cleanedNum || cleanedNum === ".") return cleanedNum;
@@ -67,6 +83,37 @@ export function Table({
     if (parts[1]) parts[1] = parts[1].slice(0, 2);
 
     return "$" + parts.join(".");
+  };
+
+  // Handle drag start
+  const handleDragStart = (index: number) => {
+    setDraggingIndex(index);
+  };
+
+  // Handle drag over
+  const handleDragOver = (index: number) => {
+    if (draggingIndex === null || draggingIndex === index) return;
+    setDragOverIndex(index);
+  };
+
+  // Handle drag end
+  const handleDragEnd = () => {
+    setDraggingIndex(null);
+    setDragOverIndex(null);
+  };
+
+  // Handle drop
+  const handleDrop = (index: number) => {
+    if (draggingIndex === null || draggingIndex === index) return;
+    const updatedTransactions = [...transactions];
+    const draggedRow = updatedTransactions[draggingIndex];
+
+    // Remove the dragged row and insert it in the new position
+    updatedTransactions.splice(draggingIndex, 1);
+    updatedTransactions.splice(index, 0, draggedRow);
+
+    setTransactions(updatedTransactions);
+    setDraggingIndex(null); // Reset dragging state
   };
 
   return (
@@ -83,8 +130,20 @@ export function Table({
         </thead>
         <tbody>
           {transactions.map((row, rowIndex) => (
-            <tr key={rowIndex}>
+            <tr
+              key={rowIndex}
+              draggable
+              onDragStart={() => handleDragStart(rowIndex)}
+              onDragOver={(e) => {
+                e.preventDefault();
+                handleDragOver(rowIndex);
+              }}
+              onDragEnd={handleDragEnd}
+              onDrop={() => handleDrop(rowIndex)}
+              className={dragOverIndex === rowIndex ? "drag-over" : ""}
+            >
               <td>
+                <i className="material-icons grab-handle">drag_indicator</i>
                 <button
                   className={row.isSpending ? "red" : "green"}
                   onClick={() => handleToggle(rowIndex, "isSpending")}
