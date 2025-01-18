@@ -7,7 +7,7 @@ export function Table({
   setTransactions,
 }: {
   transactions: Transaction[];
-  setTransactions: (updatedTransactions: Transaction[]) => void;
+  setTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>;
 }) {
   const defaultTransaction: Transaction = {
     isSpending: true,
@@ -53,7 +53,7 @@ export function Table({
     const updatedRow = { ...updatedTransactions[rowIndex] };
 
     updatedRow[columnName] = !updatedRow[columnName];
-    updatedRow.isTouched = true; // Mark as touched
+    updatedRow.isTouched = true;
 
     updatedTransactions[rowIndex] = updatedRow;
     setTransactions(updatedTransactions);
@@ -61,7 +61,7 @@ export function Table({
 
   const addRow = () => {
     setTransactions((prevTransactions) => [
-      ...prevTransactions,
+      ...(prevTransactions || []),
       { ...defaultTransaction },
     ]);
   };
@@ -85,35 +85,30 @@ export function Table({
     return "$" + parts.join(".");
   };
 
-  // Handle drag start
   const handleDragStart = (index: number) => {
     setDraggingIndex(index);
   };
 
-  // Handle drag over
   const handleDragOver = (index: number) => {
     if (draggingIndex === null || draggingIndex === index) return;
     setDragOverIndex(index);
   };
 
-  // Handle drag end
   const handleDragEnd = () => {
     setDraggingIndex(null);
     setDragOverIndex(null);
   };
 
-  // Handle drop
   const handleDrop = (index: number) => {
     if (draggingIndex === null || draggingIndex === index) return;
     const updatedTransactions = [...transactions];
     const draggedRow = updatedTransactions[draggingIndex];
 
-    // Remove the dragged row and insert it in the new position
     updatedTransactions.splice(draggingIndex, 1);
     updatedTransactions.splice(index, 0, draggedRow);
 
     setTransactions(updatedTransactions);
-    setDraggingIndex(null); // Reset dragging state
+    setDraggingIndex(null);
   };
 
   return (
