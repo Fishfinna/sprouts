@@ -1,12 +1,9 @@
-$calendar-background-color: #455345;
-$button-background-color: #6f876f;
-$button-hover-color: #8cb28c;
-$text: #eff6ef;
+@use "../../variables" as var;
 
 .calendar-container {
     max-width: 600px;
     margin: auto;
-    background-color: $calendar-background-color;
+    background-color: var.$calendar-background-color;
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -27,7 +24,7 @@ $text: #eff6ef;
                     position: absolute;
                     width: 5px;
                     height: 5px;
-                    background-color: $text;
+                    background-color: var.$light-text;
                     border-radius: 5px;
                     top: 80%;
                     left: 51%;
@@ -36,7 +33,7 @@ $text: #eff6ef;
             }
 
             &--active {
-                background-color: $button-hover-color;
+                background-color: var.$button-hover-color;
                 border: none;
                 box-shadow: none !important;
             }
@@ -59,7 +56,7 @@ $text: #eff6ef;
         &__month-view {
             &__weekdays {
                 text-align: center;
-                color: $text;
+                color: var.$light-text;
                 font-family: dosis;
 
                 abbr {
@@ -110,19 +107,19 @@ $text: #eff6ef;
 
     button {
         margin: 5px;
-        background-color: $button-background-color;
+        background-color: var.$button-background-color;
         border: 0;
         border-radius: 5px;
-        color: $text;
+        color: var.$light-text;
         padding: 11px;
         cursor: pointer;
 
         &:hover {
-            background-color: $button-hover-color;
+            background-color: var.$button-hover-color;
         }
 
         &:active {
-            background-color: $text;
+            background-color: var.$light-text;
         }
     }
 
@@ -135,10 +132,10 @@ $text: #eff6ef;
             border: none;
             font-size: large;
             margin: 5px;
-            color: $button-hover-color;
+            color: var.$button-hover-color;
 
             &:hover {
-                color: $button-background-color
+                color: var.$button-background-color
             }
 
             &.hidden {
