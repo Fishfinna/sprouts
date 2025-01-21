@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import "./fieManager.scss";
-
-export interface Transaction {
-  isSpending: boolean;
-  category?: string;
-  date?: Date | string;
-  isNeed: boolean | null;
-  price?: string;
-}
+import { Transaction } from "../../types/transaction";
 
 export function CSVReader({
   setTransactions,
