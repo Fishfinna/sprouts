@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Transaction } from "../../types/transaction";
 import "./table.scss";
 
