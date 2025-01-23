@@ -8,6 +8,7 @@ export function CSVReader({
   setTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>;
 }) {
   const [fileMsg, setFileMsg] = useState("or drag and drop files here");
+  const [fileError, setFileError] = useState("only .csv files may be imported");
   const [isActive, setIsActive] = useState(false);
 
   function loadFiles(event: ProgressEvent<FileReader>) {
@@ -100,7 +101,7 @@ export function CSVReader({
           onBlur={() => setIsActive(false)}
         />
       </div>
-      <p className="error">finish me</p>
+      <p className="error">{fileError}</p>
     </>
   );
 }
