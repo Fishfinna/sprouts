@@ -15,9 +15,6 @@ function App() {
       date: new Date().toLocaleDateString("en-CA"),
     },
   ]);
-
-  console.log(transactions);
-
   return (
     <>
       <h1>Sprout</h1>
