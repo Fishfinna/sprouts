@@ -1,28 +1,17 @@
-import { DisplayCalendar } from "./components/calendar/calendar";
-import { CalendarDate } from "./types/calendar-date";
-import { Transaction } from "./types/transaction";
-import { useState } from "react";
-import { Table } from "./components/table/table";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Dashboard } from "./pages/dashboard/dashboard";
 import "./App.scss";
-import CSVReader from "./components/file-manager/fileManager";
 
-function App() {
-  const [date, setDate] = useState<CalendarDate>(new Date());
-  const [transactions, setTransactions] = useState<Transaction[]>([
-    {
-      isSpending: true,
-      isNeed: true,
-      date: new Date().toLocaleDateString("en-CA"),
-    },
-  ]);
+export default function App() {
   return (
-    <>
-      <h1>Sprout</h1>
-      <DisplayCalendar date={date} setDate={setDate} />
-      <CSVReader setTransactions={setTransactions} />
-      <Table transactions={transactions} setTransactions={setTransactions} />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Dashboard />} />
+          <Route path="home" element={<p>home</p>} />
+          <Route path="*" element={<p>error page</p>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
